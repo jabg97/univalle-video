@@ -1,0 +1,62 @@
+<mat-toolbar
+  color="primary"
+  class="example-toolbar"
+  *ngIf="visible || !BP.isXS"
+>
+  <button mat-icon-button (click)="navService.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <img class="ml-lg-3 h-50 mr-1" src="../../../assets/logo.png" alt="" />
+  <p>Univalle</p>
+  <span
+    matBadge="V1"
+    matBadgeColor="primary"
+    matBadgeSize="small"
+    matBadgeOverlap="false"
+    class="mb-3 mr-3"
+  ></span>
+  <div class="w-100 d-flex justify-content-center" *ngIf="!BP.isXS">
+    <input
+      class="p-2"
+      [class.w-100]="BP.isMD || BP.isSM"
+      type="text"
+      placeholder="Buscar"
+    />
+    <mat-icon class="icon">search</mat-icon>
+  </div>
+
+  <div class="ml-auto">
+    <button class="search-btn" mat-icon-button (click)="open()" *ngIf="BP.isXS">
+      <mat-icon>search</mat-icon>
+    </button>
+    <button mat-icon-button>
+      <mat-icon>video_call</mat-icon>
+    </button>
+
+
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
+
+<mat-toolbar color="primary" *ngIf="!visible && BP.isXS">
+  <div class="w-100 d-flex justify-content-center">
+    <button mat-icon-button (click)="open()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <input class="p-2 mt-1 w-100" type="text" placeholder="Search" />
+    <mat-icon class="icon mt-1">search</mat-icon>
+  </div>
+</mat-toolbar>
+
+<mat-menu #menu="matMenu" class="menu">
+  <button [routerLink]="['/channel/1']" mat-menu-item>
+    <mat-icon>account_box_icon</mat-icon>
+    <span>Mi Canal</span>
+  </button>
+  <button [routerLink]="['/login']" mat-menu-item>
+    <mat-icon>exit_to_app</mat-icon>
+    <span>Cerrar Sesión</span>
+  </button>
+</mat-menu>

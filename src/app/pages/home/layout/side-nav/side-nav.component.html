@@ -1,0 +1,15 @@
+<mat-nav-list class="dashboard">
+  <a [routerLink]="['']"  mat-list-item class="item">
+    <mat-icon mat-list-icon>home</mat-icon>
+    <p matLine *ngIf="navService.isOpen">Pagína Principal</p>
+  </a>
+
+  <a mat-list-item class="item">
+    <mat-icon mat-list-icon>subscriptions</mat-icon>
+    <p matLine *ngIf="navService.isOpen">Subscriciones</p>
+  </a>
+
+  <mat-divider *ngIf="navService.isOpen"></mat-divider>
+
+
+</mat-nav-list>

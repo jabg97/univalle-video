@@ -1,0 +1,23 @@
+<div class="nav-container">
+  <app-app-bar></app-app-bar>
+  <mat-sidenav-container class="mat-sidenav-container" autosize>
+    <mat-sidenav
+      [fixedInViewport]="false"
+      [mode]="BP.isXS || BP.isSM || navService.isWatch ? 'over' : 'side'"
+      #sidenav
+      [opened]="BP.isXS || BP.isSM || navService.isWatch ? navService.isOpen : true"
+      [@onSideNavChange]="navService.isOpen"
+      (closed)="navService.closeNav()"
+    >
+      <app-side-nav></app-side-nav>
+    </mat-sidenav>
+
+    <mat-sidenav-content
+      [@onMainContentChange]="BP.isXS || BP.isSM || navService.isWatch ? 'null' : navService.isOpen"
+    >
+      <div class="content">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
