@@ -22,6 +22,8 @@ import { ApiService } from "./services/api.service";
 import { AppComponent } from "./app.component";
 //import { AuthGuard } from "./auth.guard";
 import { ChannelComponent } from './pages/home/channel/channel.component';
+import { UploadComponent } from './pages/home/upload/upload.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { ChannelComponent } from './pages/home/channel/channel.component';
     WatchComponent,
     VideoRelatedComponent,
     ChannelComponent,
+    UploadComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -41,6 +44,7 @@ import { ChannelComponent } from './pages/home/channel/channel.component';
     BrowserModule,
     LayoutModule,
     FormsModule,
+    MatSnackBarModule,
     VgCoreModule,
     VgControlsModule,
     VgOverlayPlayModule,

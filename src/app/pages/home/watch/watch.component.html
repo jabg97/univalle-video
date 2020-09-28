@@ -55,192 +55,118 @@
             #media
             id="singleVideo"
             preload="auto"
-            crossorigin
+            crossorigin="anonymous"
             autoplay
           >
             <source
-              src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+            id="sourceVideo"
+              src="{{ url }}video/stream/{{ video.id }}"
               type="video/mp4"
-            />
-            <source
-              src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.ogg"
-              type="video/ogg"
-            />
-            <source
-              src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.webm"
-              type="video/webm"
-            />
-
-            
-            <track
-              kind="subtitles"
-              label="Español"
-              src="http://static.videogular.com/assets/subs/pale-blue-dot-es.vtt"
-              srclang="es"
-            />
-            <track
-              kind="subtitles"
-              label="English"
-              src="http://static.videogular.com/assets/subs/pale-blue-dot.vtt"
-              srclang="en"
-              default
             />
           </video>
         </vg-player>
       </div>
       <div class="bottom">
-        <p class="tag">#Comedia #Cocina</p>
         <p class="title">
-          Tutorial Press Banca Inclinado (!150 Kilos!)
+          {{ video.nombre }}
         </p>
         <div class="d-flex">
-          <p class="views">2,500,470 vistas• 22 Feb 2020</p>
+          <p class="views">{{ video.views }} vistas • {{ video.created_at }}</p>
           <div style="flex-grow: 1;"></div>
           <div class="like-dislike">
-            <button mat-icon-button>
+            <button mat-icon-button (click)="like(video.id)">
               <mat-icon>thumb_up</mat-icon>
             </button>
-            <span>156K</span>
-            <button mat-icon-button>
+            <span>{{ video.likes }}</span>
+            <button mat-icon-button (click)="dislike(video.id)">
               <mat-icon>thumb_down</mat-icon>
             </button>
-            <span>56K</span>
+            <span>{{ video.dislikes }}</span>
           </div>
-          <button mat-icon-button>
-            <mat-icon>share</mat-icon>
-          </button>
-          <span class="share">Compartir</span>
-          <button mat-icon-button>
-            <mat-icon>playlist_add</mat-icon>
-          </button>
-          <span class="share">Guardar</span>
         </div>
         <mat-divider></mat-divider>
         <div class="mt-3">
           <div class="d-flex">
-            <img
-              class="avatar"
-              src="data:image/jpeg;base64,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"
+            <img class="link" [routerLink]="['/channel/'+video.user_id]"
+              class="avatar"  alt="User" onerror="this.src='../../../assets/img/user.jpg'"
+              src="{{ video.profile }}"
               alt=""
             />
             <div id="channel" style="display: flex; flex-direction: column;">
-              <span>Usuario Random</span>
-              <p>9,5M subscriptores</p>
+              <span class="link" [routerLink]="['/channel/'+video.user_id]">{{ video.name }}</span>
+              <p>{{ subs }} subscriptores</p>
             </div>
             <div style="flex-grow: 1;"></div>
-            <button class="subscribe" mat-flat-button color="warn">
+            <button *ngIf="state == 1" class="subscribe" (click)="subscribe(video.user_id)" mat-flat-button color="warn">
               Subscribete
             </button>
+
+            <button *ngIf="state == 2" class="subscribe" (click)="desubscribe(video.user_id)" mat-flat-button color="accent">
+              Desubscribete
+            </button>
+            
           </div>
+        
           <div class="description">
-            Pres de banca con 150 kilos... <br />
-            <p class="description-text">
-              En este video intento hacer press de banca con 150 kilos 💪🏿💪🏿💪🏿
-              mira lo que sucede al final. <br /><br />
-              Subscribete para mas tutoriales y consejos acerca del mundo fitness.
-            </p>
-            <span class="show-less">Mostrar menos</span>
+       {{ video.descripcion }}    
           </div>
           <mat-divider class="comment-divider"></mat-divider>
-          <span>2 Comentarios</span>
-          <button mat-button class="sort-btn">
-            <mat-icon>sort</mat-icon>
-            <span> Ordenar por</span>
-          </button>
+          <span>{{ comments_count }} Comentarios</span>
         </div>
+     
         <div class="mt-3 d-flex">
           <img
             class="avatar-sm"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQd4ObnWrU7ml2eO_EPN30EORQhhiV5OuBttw&usqp=CAU"
+            onerror="this.src='../../../assets/img/user.jpg'"
+            src="{{ user.profile }}"
             alt=""
           />
-          <form class="w-100">
+          <form class="w-100" #fc="ngForm" (ngSubmit)="CommentSubmit(fc)">
+            <input matInput name="id_video" ngModel #id_video="ngModel"/>
             <mat-form-field
               class="w-100 ml-3"
               style="font-size: 13px; color: black;"
               floatLabel="never"
             >
               <mat-label>Añadir un comentario publico...</mat-label>
-              <input matInput />
+              <input matInput name="comment_text" ngModel #comment_text="ngModel"/>
             </mat-form-field>
-            <div class="comment-btn-group" *ngIf="true">
-              <button mat-flat-button class="submit">Cancelar</button>
+            <div class="comment-btn-group">
               <button mat-flat-button color="primary" class="submit ml-1">
                 Comentar
               </button>
             </div>
           </form>
         </div>
-        <div class="mt-4 d-flex">
-          <img
-            class="avatar-sm"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRSDXwxl3CI0u9Bwy-tkjM9cIbiLiIa1QxPJQ&usqp=CAU"
-            alt=""
-          />
-          <div class="d-flex flex-column">
-            <button mat-icon-button disableRipple="true" class="pin ml-3">
-              <mat-icon>push_pin</mat-icon>
-              Fijado Por Rey del fitness
-            </button>
-            <div class="d-flex chip">
-              <span>
-                Canal Random
-                <mat-icon>done</mat-icon>
-              </span>
-              <p>Hace 3 semanas</p>
-            </div>
-            <p class="pin-comment">
-              Buen Video, No conocia esta tecnica.
-            </p>
-            <div class="d-flex mt-1 comment-like">
-              <button mat-icon-button>
-                <mat-icon>thumb_up</mat-icon>
-              </button>
-              <p>730</p>
-              <button mat-icon-button>
-                <mat-icon>thumb_down</mat-icon>
-              </button>
-              <p>50</p>
-              <span>Responder</span>
-            </div>
-            <button mat-button class="view-replies-btn" disableRipple="true">
-              <mat-icon>arrow_drop_down</mat-icon>
-              Ver 3 respuestas
-            </button>
-          </div>
-        </div>
-      </div>
-      <div class="mt-4 d-flex">
+      <div class="mt-4 d-flex"  *ngFor="let comment of comments">
         <img
-          class="avatar-sm"
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQW83agCSZlpwglUiyd430KhxpwrLygr271bw&usqp=CAU"
+          class="avatar-sm"  alt="User" 
+          onerror="this.src='../../../assets/img/user.jpg'"
+          src="{{ comment.profile }}"
           alt=""
         />
         <div class="d-flex flex-column">
-          <p class="name"><strong>Culturista Profesional</strong> Hace 2 minutos</p>
+          <p class="name"><strong>{{ comment.name }}</strong> • {{ comment.created_at }}</p>
           <p class="pin-comment">
-            Malisimo el video, esta enseñando con una mala postura, hice lo que muestra el video y casi me quiebro columna, ¡no lo intenten en casa que se pueden lastimar!
+            {{ comment.texto }}
           </p>
           <div class="d-flex mt-1 comment-like">
             <button mat-icon-button>
               <mat-icon>thumb_up</mat-icon>
             </button>
-            <p>240</p>
+            <p>{{ comment.likes }}</p>
             <button mat-icon-button>
               <mat-icon>thumb_down</mat-icon>
             </button>
-            <p>5040</p>
-            <span>Responder</span>
+            <p>{{ comment.dislikes }}</p>
+           
           </div>
-          <button mat-button class="view-replies-btn" disableRipple="true">
-            <mat-icon>arrow_drop_down</mat-icon>
-            Ver 500 respuestas
-          </button>
+          
         </div>
       </div>
-    </div>
+    </div></div>
     <div class="col-lg-4 col-md-6 col-sm-12 side">
-      <app-video-related></app-video-related>
+      <app-video-related [later]=later [videos]=videos></app-video-related>
     </div>
   </div>
 </div>

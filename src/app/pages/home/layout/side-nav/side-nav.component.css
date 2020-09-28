@@ -10,6 +10,7 @@ mat-icon::selection {
   line-height: 21px;
   height: 48px !important;
 }
+
 p::selection {
   color: none;
   background: none;

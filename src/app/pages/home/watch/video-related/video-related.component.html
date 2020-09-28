@@ -2,35 +2,35 @@
   <p class="mt-1">Siguiente Video</p>
   <div style="flex-grow: 1;"></div>
 </div>
-<div class="d-flex mt-3">
+<div class="d-flex mt-3" *ngFor="let video of later">
   <div class="content">
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQTmAVstHLq34KTUjsLsItu2IOEMWvpHOzbtA&usqp=CAU" alt="" />
-    <span class="time">7:41</span>
+    <img class="link"  onerror="this.src='../../../assets/img/thumbnail.jpg'"
+    src="{{ video.img }}"[routerLink]="['/watch/'+video.id]" alt="" />
+    <span class="time">{{ video.tiempo }}</span>
   </div>
   <div class="side-content pl-2">
-    <p>
-      Receta Pastel de Lulo
-    </p>
-    <p class="channel">Mi canal</p>
+    <p class="mainlink" [routerLink]="['/watch/'+video.id]">{{ video.nombre }}</p>
+    <p [routerLink]="['/channel/'+video.user_id]" class="channel link">{{ video.name }}</p>
     <p class="channel">
-      65K vistas.
-      <span class="ml-1">6 months ago</span>
+      {{ video.views }} vistas.
+      <span class="ml-1">{{ video.created_at }}</span>
     </p>
   </div>
 </div>
 <mat-divider class="mt-3"></mat-divider>
 <div>
-  <div class="d-flex mt-3" *ngFor="let item of items">
+  <div class="d-flex mt-3" *ngFor="let video of videos">
     <div class="content">
-      <img src="data:image/png;base64,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" alt="" />
-      <span class="time">7:41</span>
+      <img class="link"  onerror="this.src='../../../assets/img/thumbnail.jpg'"
+      src="{{ video.img }}"[routerLink]="['/watch/'+video.id]" alt="" />
+      <span class="time">{{ video.tiempo }}</span>
     </div>
     <div class="side-content pl-2">
-      <p>{{ item.title }}</p>
-      <p class="channel">Mi Canal</p>
+      <p class="mainlink" [routerLink]="['/watch/'+video.id]">{{ video.nombre }}</p>
+      <p [routerLink]="['/channel/'+video.user_id]" class="channel link">{{ video.name }}</p>
       <p class="channel">
-        650K vistas.
-        <span class="ml-1">{{ item.month }}</span>
+        {{ video.views }} vistas.
+        <span class="ml-1">{{ video.created_at }}</span>
       </p>
     </div>
   </div>

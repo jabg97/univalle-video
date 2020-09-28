@@ -19,5 +19,6 @@ export class HomeComponent implements OnInit {
     public BP: ScreenBreakpointService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 }

@@ -1,26 +1,111 @@
-<img src="../../../assets/img/banner.jpg" class="banner" alt="" />
+
+  <img src="{{ user.banner }}" onerror="this.src='../../../assets/img/banner.jpg'" class="banner" alt="" />
 <div class="container">
   <div class="channel">
-    <img
-      class="avatar"
-      src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRoU5G39EWaDbS_ObkM2OXpyZ6xQZwWokf05w&usqp=CAU"
-      alt="logo"
-    />
+    <img class="avatar"
+    onerror="this.src='../../../assets/img/user.jpg'"
+      src="{{ user.profile }}"
+      alt="logo" />
     <div class="channel-name-subs">
-      <p>mi canal</p>
-      <small>5M subscriptores</small>
+      <p>{{ user.name }}</p>
+      <small>{{ subs }} subscriptores</small>
     </div>
     <div class="mx-auto"></div>
-    <button class="subscribe" mat-flat-button color="warn">
-      Subscribete
+    <button *ngIf="state == 1" class="subscribe" (click)="subscribe(user.id)" mat-flat-button color="warn">
+      Subscribete 
+    </button>
+
+    <button *ngIf="state == 2" class="subscribe" (click)="desubscribe(user.id)" mat-flat-button color="accent">
+      Desubscribete
     </button>
   </div>
   <div class="tab">
     <mat-tab-group animationDuration="350ms">
-      <mat-tab label="Pagina Principal">Pagina Principal</mat-tab>
-      <mat-tab label="Videos">Videos</mat-tab>
-      <mat-tab label="Canales">Canales</mat-tab>
-      <mat-tab label="Información">Información</mat-tab>
+      <mat-tab label="Pagina Principal">
+        <mat-card-content>
+          <h4>Video Destacado:</h4>
+          <div class="d-flex mt-3" *ngIf="videos[0]">
+            <div class="content">
+              <img class="link"  onerror="this.src='../../../assets/img/thumbnail.jpg'"
+              src="{{ videos[0].img }}"[routerLink]="['/watch/'+videos[0].id]" alt="" />
+              <span class="time">{{ videos[0].tiempo }}</span>
+            </div>
+            <div class="side-content pl-2">
+              <p class="mainlink" [routerLink]="['/watch/'+videos[0].id]">{{ videos[0].nombre }}</p>
+              <p [routerLink]="['/channel/'+videos[0].user_id]" class="channel link">{{ videos[0].name }}</p>
+              <p class="channel">
+                {{ videos[0].views }} vistas.
+                <span class="ml-1">{{ videos[0].created_at }}</span>
+              </p>
+            </div>
+           
+          </div>
+          <hr *ngIf="videos[0]"/>
+        <h4>Biografia:</h4>
+        {{ user.bio }}
+        <hr/>
+      </mat-card-content>
+      </mat-tab>
+      <mat-tab label="Videos">
+        <mat-card-content>
+          <div class="d-flex mt-3" *ngFor="let video of videos">
+            <div class="content">
+              <img class="link"  onerror="this.src='../../../assets/img/thumbnail.jpg'"
+              src="{{ video.img }}"[routerLink]="['/watch/'+video.id]" alt="" />
+              <span class="time">{{ video.tiempo }}</span>
+            </div>
+            <div class="side-content pl-2">
+              <p class="mainlink" [routerLink]="['/watch/'+video.id]">{{ video.nombre }}</p>
+              <p [routerLink]="['/channel/'+video.user_id]" class="channel link">{{ video.name }} </p>
+              <mat-icon>edit</mat-icon>  <mat-icon>delete</mat-icon>
+              <p class="channel">
+                {{ video.views }} vistas.
+                <span class="ml-1">{{ video.created_at }}</span>
+              </p>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-tab>
+      <mat-tab label="Suscripciones">
+        <mat-card-content>
+        <div class="d-flex mt-3" *ngFor="let user of subscriptions">
+          <div class="content">
+            <img class="link-circle"  onerror="this.src='../../../assets/img/user.jpg'"
+            src="{{ user.profile }}"[routerLink]="['/channel/'+user.id]" alt="" />
+          </div>
+          <div class="side-content pl-2">
+            <p [routerLink]="['/channel/'+user.id]" class="link-title">{{ user.name }}</p>
+          </div>
+          <button  class="subscribe right" (click)="desubscribe_reload(user.id)" mat-flat-button color="accent">
+            Desubscribete
+          </button>
+      </div>
+    </mat-card-content>
+  </mat-tab>
+      <mat-tab *ngIf="state == 0" label="Información"><mat-card-content>
+        <form action="#" #fu="ngForm" (ngSubmit)="UserSubmit(fu)">
+          <mat-form-field>
+            
+            <textarea matInput cdkTextareaAutosize
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="5"
+            placeholder="Biografia" name="bio" value="{{ user.bio }}" ngModel #bio="ngModel"></textarea>
+            <mat-icon matSuffix>edit</mat-icon>
+            <mat-error *ngIf="bio.invalid">
+              Biografia requerida
+            </mat-error>
+          </mat-form-field>
+         
+            
+            <input (change)="BannerChange($event)"  class="ng-hide" id="banner" name="banner" type="file" accept="image/*" />
+            <label for="banner" class="file-button"><mat-icon>photo_size_select_actual</mat-icon> Subir Banner: <span id="size"></span></label>
+            <input (change)="ProfileChange($event)"  class="ng-hide" id="profile" name="profile" type="file" accept="image/*" />
+            <label for="profile" class="file-button"><mat-icon>image</mat-icon> Subir Foto: <span id="size2"></span></label>
+          <button mat-raised-button color="primary" class="auth-button">
+            Actualizar
+          </button>
+        </form>
+      </mat-card-content></mat-tab>
     </mat-tab-group>
   </div>
 </div>

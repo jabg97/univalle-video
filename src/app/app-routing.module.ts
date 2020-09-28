@@ -6,11 +6,12 @@ import { SideNavComponent } from "./pages/home/layout/side-nav/side-nav.componen
 import { AppBarComponent } from "./pages/home/layout/app-bar/app-bar.component";
 import { MenuComponent } from "./pages/home/main/menu/menu.component";
 import { MainComponent } from "./pages/home/main/main.component";
-import { LoginComponent } from "./pages/auth/login/login.component";
+import { AuthComponent } from "./pages/auth/auth.component";
 import { HomeComponent } from "./pages/home/home.component";
 import { AuthGuard } from "./auth.guard";
 import { WatchComponent } from "./pages/home/watch/watch.component";
 import { ChannelComponent } from "./pages/home/channel/channel.component";
+import { UploadComponent } from "./pages/home/upload/upload.component";
 
 const routes: Routes = [
   {
@@ -23,18 +24,34 @@ const routes: Routes = [
         component: MainComponent,
       },
       {
+        path: "subscriptions",
+        component: MainComponent,
+      },
+      {
+        path: "query/:id",
+        component: MainComponent,
+      },
+      {
         path: "watch/:id",
         component: WatchComponent,
       },
       {
+        path: "channel",
+        component: ChannelComponent,
+      },
+      {
         path: "channel/:id",
         component: ChannelComponent,
-      }
+      },
+      {
+        path: "upload",
+        component: UploadComponent,
+      }    
     ],
   },
   {
-    path: "login",
-    component: LoginComponent,
+    path: "auth",
+    component: AuthComponent,
   }
 ];
 
@@ -47,7 +64,7 @@ export const RoutingComponents = [
   WatchComponent,
   SideNavComponent,
   AppBarComponent,
-  LoginComponent,
+  AuthComponent,
   HomeComponent,
   MainComponent,
   MenuComponent,
