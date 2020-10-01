@@ -26,7 +26,7 @@ import {
   providedIn: "root"
 })
 export class ApiService {
-  private url: string = "https://univalle-video.herokuapp.com/api/";
+  private url: string = "http://181.52.135.78:8081/api/";
 
   constructor(private http: HttpClient, private router: Router, private snackBar: MatSnackBar) {}
 

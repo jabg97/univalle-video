@@ -53,8 +53,8 @@
             <div class="side-content pl-2">
               <p class="mainlink" [routerLink]="['/watch/'+video.id]">{{ video.nombre }}</p>
               <p [routerLink]="['/channel/'+video.user_id]" class="channel link">{{ video.name }} </p>
-              <mat-icon [routerLink]="['/upload/'+video.id]" class="link txt-warning">edit</mat-icon>
-              <mat-icon (click)="delete(video.id,i)" class="link txt-danger">delete</mat-icon>
+              <mat-icon *ngIf="video.user_id == user.id" [routerLink]="['/upload/'+video.id]" class="link txt-warning">edit</mat-icon>
+              <mat-icon *ngIf="video.user_id == user.id" (click)="delete(video.id,i)" class="link txt-danger">delete</mat-icon>
               <p class="channel">
                 {{ video.views }} vistas.
                 <span class="ml-1">{{ video.created_at }}</span>
