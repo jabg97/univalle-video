@@ -2,11 +2,13 @@
   <button mat-icon-button (click)="navService.toggle()">
     <mat-icon>menu</mat-icon>
   </button>
-  <img [routerLink]="['']"  class="ml-lg-3 h-50 mr-1 link" src="../../../assets/logo.png" alt="" />
+  <img [routerLink]="['']" class="ml-lg-3 h-50 mr-1 link" src="../../../assets/logo.png" alt="" />
   <p [routerLink]="['']" class="link">Univalle</p>
-  <span [routerLink]="['']" matBadge="V2" matBadgeColor="primary" matBadgeSize="small" matBadgeOverlap="false" class="mb-3 mr-3 link"></span>
+  <span [routerLink]="['']" matBadge="V2" matBadgeColor="primary" matBadgeSize="small" matBadgeOverlap="false"
+    class="mb-3 mr-3 link"></span>
   <div class="w-100 d-flex justify-content-center" *ngIf="!BP.isXS">
-    <input  value="{{ query }}" [(ngModel)]="query" class="p-2" [class.w-100]="BP.isMD || BP.isSM" type="search" placeholder="Buscar" />
+    <input value="{{ query }}" [(ngModel)]="query" class="p-2" [class.w-100]="BP.isMD || BP.isSM" type="search"
+      placeholder="Buscar" />
     <mat-icon class="icon" (click)="search()">search</mat-icon>
   </div>
 

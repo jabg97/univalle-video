@@ -1,4 +1,8 @@
-import { Component, OnInit, Input } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input
+} from "@angular/core";
 
 @Component({
   selector: "app-video-related",
@@ -8,8 +12,8 @@ import { Component, OnInit, Input } from "@angular/core";
 export class VideoRelatedComponent implements OnInit {
   constructor() {}
 
-  @Input() videos: Array<any>;
-  @Input() later: Array<any>;
+  @Input() videos: Array < any > ;
+  @Input() later: Array < any > ;
 
   ngOnInit() {}
 }

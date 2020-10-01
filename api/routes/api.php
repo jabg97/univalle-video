@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\CommentController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -36,7 +37,10 @@ Route::post('video/upload', [VideoController::class, 'upload'])->name('video.upl
 Route::post('video/query', [VideoController::class, 'query'])->name('video.query');
 Route::post('video/like', [VideoController::class, 'like'])->name('video.like');
 Route::post('video/dislike', [VideoController::class, 'dislike'])->name('video.dislike');
+Route::post('video/update', [VideoController::class, 'update'])->name('video.update');
+Route::post('video/delete', [VideoController::class, 'delete'])->name('video.delete');
 
 Route::post('comment/publish', [CommentController::class, 'publish'])->name('comment.publish');
 Route::post('comment/like', [CommentController::class, 'like'])->name('comment.like');
 Route::post('comment/dislike', [CommentController::class, 'dislike'])->name('comment.dislike');
+Route::post('comment/delete', [CommentController::class, 'delete'])->name('comment.delete');

@@ -1,25 +1,48 @@
-import { Routes, RouterModule } from "@angular/router";
-import { NgModule } from "@angular/core";
+import {
+  Routes,
+  RouterModule
+} from "@angular/router";
+import {
+  NgModule
+} from "@angular/core";
 
 
-import { SideNavComponent } from "./pages/home/layout/side-nav/side-nav.component";
-import { AppBarComponent } from "./pages/home/layout/app-bar/app-bar.component";
-import { MenuComponent } from "./pages/home/main/menu/menu.component";
-import { MainComponent } from "./pages/home/main/main.component";
-import { AuthComponent } from "./pages/auth/auth.component";
-import { HomeComponent } from "./pages/home/home.component";
-import { AuthGuard } from "./auth.guard";
-import { WatchComponent } from "./pages/home/watch/watch.component";
-import { ChannelComponent } from "./pages/home/channel/channel.component";
-import { UploadComponent } from "./pages/home/upload/upload.component";
+import {
+  SideNavComponent
+} from "./pages/home/layout/side-nav/side-nav.component";
+import {
+  AppBarComponent
+} from "./pages/home/layout/app-bar/app-bar.component";
+import {
+  MenuComponent
+} from "./pages/home/main/menu/menu.component";
+import {
+  MainComponent
+} from "./pages/home/main/main.component";
+import {
+  AuthComponent
+} from "./pages/auth/auth.component";
+import {
+  HomeComponent
+} from "./pages/home/home.component";
+import {
+  AuthGuard
+} from "./auth.guard";
+import {
+  WatchComponent
+} from "./pages/home/watch/watch.component";
+import {
+  ChannelComponent
+} from "./pages/home/channel/channel.component";
+import {
+  UploadComponent
+} from "./pages/home/upload/upload.component";
 
-const routes: Routes = [
-  {
+const routes: Routes = [{
     path: "",
     component: HomeComponent,
     // canActivate: [AuthGuard],
-    children: [
-      {
+    children: [{
         path: "",
         component: MainComponent,
       },
@@ -46,7 +69,10 @@ const routes: Routes = [
       {
         path: "upload",
         component: UploadComponent,
-      }    
+      },{
+        path: "upload/:id",
+        component: UploadComponent,
+      }
     ],
   },
   {

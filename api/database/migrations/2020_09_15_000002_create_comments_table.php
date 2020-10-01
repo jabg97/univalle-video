@@ -20,7 +20,7 @@ class CreateCommentsTable extends Migration
             $table->unsignedBigInteger('dislikes');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('video_id');
-            $table->unsignedBigInteger('comment_id')->nullable();            
+            $table->unsignedBigInteger('comment_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('video_id')->references('id')->on('videos');
             $table->foreign('comment_id')->references('id')->on('comments');

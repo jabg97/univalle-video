@@ -60,6 +60,10 @@ class Comment extends Model
     {
         return $this->belongsTo(Video::class);
     }
+    public function parent()
+    {
+        return $this->belongsTo(Comment::class, 'comment_id');
+    }
     public function getCreatedAtAttribute($date)
     {
         $carbon = new Carbon($date);

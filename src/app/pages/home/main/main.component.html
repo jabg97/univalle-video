@@ -3,37 +3,38 @@
     <p class="recommended">{{ title }}</p>
   </div>
 
-  <div
-    class="card col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 justify-content-left d-flex"
-    style="margin-bottom: 10px; cursor: pointer;"
-    *ngFor="let video of videos"
-  >
+  <div class="card col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 justify-content-left d-flex"
+    style="margin-bottom: 10px; cursor: pointer;" *ngFor="let video of videos">
     <div>
-      <div [routerLink]="['/watch/'+video.id]"  class="img-container">
-        <img onerror="this.src='../../../assets/img/thumbnail.jpg'"
-          class="card-image"
-          src="{{ video.img }}"
-          alt="Thumbnail"
-        />
+      <div [routerLink]="['/watch/'+video.id]" class="img-container">
+        <img onerror="this.src='../../../assets/img/thumbnail.jpg'" class="card-image" src="{{ video.img }}"
+          alt="Thumbnail" />
         <p class="time">{{ video.tiempo }}</p>
         <mat-icon class="watch-later">favorite</mat-icon>
         <div class="later-div">Ver despues</div>
       </div>
       <div class="card-content">
         <div class="d-flex mt-2">
-          <img alt="User" onerror="this.src='../../../assets/img/user.jpg'" [routerLink]="['/channel/'+video.user_id]"  class="avatar" src="{{ video.profile }}" />
+          <img alt="User" onerror="this.src='../../../assets/img/user.jpg'" [routerLink]="['/channel/'+video.user_id]"
+            class="avatar" src="{{ video.profile }}" />
           <p [routerLink]="['/watch/'+video.id]" class="text">
             {{ video.nombre | slice: 0:70 }}
           </p>
           <div style="flex-grow: 1;"></div>
           <mat-icon class="more-icon">more_vert</mat-icon>
         </div>
-        <p [routerLink]="['/channel/'+video.user_id]"  class="title">
+        <p [routerLink]="['/channel/'+video.user_id]" class="title">
           {{ video.name }}
           <mat-icon class="check">check</mat-icon>
         </p>
-        <p class="sub-title">{{ video.views }} vistas,  {{ video.created_at }} </p>
+        <p class="sub-title">{{ video.views }} vistas, {{ video.created_at }} </p>
       </div>
     </div>
   </div>
 </div>
+<ngx-spinner
+  bdColor="rgba(0,0,0,0.5)"
+  size="large"
+  color="#fff"
+  type="pacman"
+></ngx-spinner>

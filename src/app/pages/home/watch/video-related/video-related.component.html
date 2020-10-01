@@ -4,8 +4,8 @@
 </div>
 <div class="d-flex mt-3" *ngFor="let video of later">
   <div class="content">
-    <img class="link"  onerror="this.src='../../../assets/img/thumbnail.jpg'"
-    src="{{ video.img }}"[routerLink]="['/watch/'+video.id]" alt="" />
+    <img class="link" onerror="this.src='../../../assets/img/thumbnail.jpg'" src="{{ video.img }}"
+      [routerLink]="['/watch/'+video.id]" alt="" />
     <span class="time">{{ video.tiempo }}</span>
   </div>
   <div class="side-content pl-2">
@@ -21,8 +21,8 @@
 <div>
   <div class="d-flex mt-3" *ngFor="let video of videos">
     <div class="content">
-      <img class="link"  onerror="this.src='../../../assets/img/thumbnail.jpg'"
-      src="{{ video.img }}"[routerLink]="['/watch/'+video.id]" alt="" />
+      <img class="link" onerror="this.src='../../../assets/img/thumbnail.jpg'" src="{{ video.img }}"
+        [routerLink]="['/watch/'+video.id]" alt="" />
       <span class="time">{{ video.tiempo }}</span>
     </div>
     <div class="side-content pl-2">

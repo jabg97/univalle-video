@@ -1,6 +1,13 @@
-import { Injectable } from "@angular/core";
-import { BreakpointObserver, BreakpointState } from "@angular/cdk/layout";
-import { BehaviorSubject } from "rxjs";
+import {
+  Injectable
+} from "@angular/core";
+import {
+  BreakpointObserver,
+  BreakpointState
+} from "@angular/cdk/layout";
+import {
+  BehaviorSubject
+} from "rxjs";
 
 export enum Breakpoints {
   "XS" = "xs",
@@ -42,13 +49,15 @@ export class ScreenBreakpointService {
     return this.states == Breakpoints.XL;
   }
 
-  private screenSizeObserver = new BehaviorSubject<Breakpoints[]>([
+  private screenSizeObserver = new BehaviorSubject < Breakpoints[] > ([
     Breakpoints.XS
   ]);
 
   constructor(private breakpointObserver: BreakpointObserver) {
     this.initObservers();
-    this.screenSizeObserver.subscribe({ next: state => (this.states = state) });
+    this.screenSizeObserver.subscribe({
+      next: state => (this.states = state)
+    });
   }
 
   private initObservers() {

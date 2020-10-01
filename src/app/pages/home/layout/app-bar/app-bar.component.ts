@@ -29,14 +29,16 @@ export class AppBarComponent implements OnInit {
     private _api: ApiService,
     private snackBar: MatSnackBar,
     private router: Router
-  ) {this.query =this._api.getQuery;}
+  ) {
+    this.query = this._api.getQuery;
+  }
 
   visible = true;
- query:string;
+  query: string;
 
   search() {
     localStorage.setItem('query', this.query);
-    this.router.navigateByUrl('query/'+btoa(this.query));
+    this.router.navigateByUrl('query/' + btoa(this.query));
   }
 
   open() {

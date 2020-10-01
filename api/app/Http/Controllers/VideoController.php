@@ -23,8 +23,12 @@ class VideoController extends Controller
         try {
             $videos = Video::join('users', 'users.id', '=', 'videos.user_id')
             ->select('videos.*', 'users.name', 'users.profile')->orderBy('videos.created_at', 'desc')->get();
-            return response()->json(['status' => 200,"videos"=>$videos],
-            200, [], JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
+            return response()->json(
+                ['status' => 200,"videos"=>$videos],
+                200,
+                [],
+                JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT
+            );
         } catch (Throwable $e) {
             return response()->json(['status' => 500, 'message' => $e->getMessage()."."]);
         }
@@ -32,13 +36,11 @@ class VideoController extends Controller
 
     public function stream($id)
     {
-     
-            $video = Video::find($id);
-            $video= Storage::disk('videos')->get($video->url);
-            $response = Response::make($video, 200);
-   $response->header('Content-Type', 'video/mp4');
-   return $response;
-     
+        $video = Video::find($id);
+        $video= Storage::disk('videos')->get($video->url);
+        $response = Response::make($video, 200);
+        $response->header('Content-Type', 'video/mp4');
+        return $response;
     }
 
 
@@ -46,16 +48,20 @@ class VideoController extends Controller
     public function subscriptions($id)
     {
         try {
-        $videos = Video::join('users', 'users.id', '=', 'videos.user_id')
+            $videos = Video::join('users', 'users.id', '=', 'videos.user_id')
         ->join('user_sub', 'users.id', '=', 'user_sub.user_id')
         ->select('videos.*', 'users.name', 'users.profile')->orderBy('videos.created_at', 'desc')
         ->orderBy('videos.likes', 'desc')->orderBy('videos.views', 'desc')
         ->where("user_sub.sub_id", "=", $id)->get();
-        return response()->json(['status' => 200,"videos"=>$videos],
-        200, [], JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
-    } catch (Throwable $e) {
-        return response()->json(['status' => 500, 'message' => $e->getMessage()."."]);
-    }
+            return response()->json(
+                ['status' => 200,"videos"=>$videos],
+                200,
+                [],
+                JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT
+            );
+        } catch (Throwable $e) {
+            return response()->json(['status' => 500, 'message' => $e->getMessage()."."]);
+        }
     }
 
     public function query(Request $request)
@@ -65,16 +71,20 @@ class VideoController extends Controller
             $videos = Video::join('users', 'users.id', '=', 'videos.user_id')
             ->join('user_sub', 'users.id', '=', 'user_sub.user_id')
             ->select('videos.*', 'users.name', 'users.profile')->orderBy('videos.views', 'desc')
-            ->orderBy('videos.likes', 'desc')->orderBy('videos.created_at', 'desc')    
-            ->where('videos.nombre', 'like', $query )->get();
-            return response()->json(['status' => 200,"videos"=>$videos],
-            200, [], JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
+            ->orderBy('videos.likes', 'desc')->orderBy('videos.created_at', 'desc')
+            ->where('videos.nombre', 'like', $query)->get();
+            return response()->json(
+                ['status' => 200,"videos"=>$videos],
+                200,
+                [],
+                JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT
+            );
         } catch (Throwable $e) {
             return response()->json(['status' => 500, 'message' => $e->getMessage()."."]);
         }
     }
 
-    public function watch($id,$user)
+    public function watch($id, $user)
     {
         try {
             $video = Video::join('users', 'users.id', '=', 'videos.user_id')
@@ -83,9 +93,9 @@ class VideoController extends Controller
             if (!$video) {
                 return response()->json(array("status"=>500,"message"=>"El video no existe."));
             }
-            if($video->user_id == $user){
+            if ($video->user_id == $user) {
                 $state = 0;
-            }else{
+            } else {
                 $state = UserSub::where("user_id", "=", $video->user_id)->where("sub_id", "=", $user)->first();
                 $state = ($state) ? 2: 1;
             }
@@ -96,20 +106,19 @@ class VideoController extends Controller
             $videos = Video::join('users', 'users.id', '=', 'videos.user_id')
             ->select('videos.*', 'users.name', 'users.profile')->where("videos.user_id", "<>", $video->user_id)->orderBy('videos.created_at', 'desc')->limit(5)->get();
             $comments = Comment::join('users', 'users.id', '=', 'comments.user_id')
-            ->select('comments.*', 'users.name', 'users.profile')->whereNull('comment_id')->where("video_id", "=", $video->id)->orderBy('likes', 'desc')->get();
+            ->select('comments.*', 'users.name', 'users.profile')->whereNull('comments.comment_id')->where("comments.video_id", "=", $video->id)->orderBy('likes', 'desc')->get();
             $video->views++;
             $video->save();
             $user = User::find($user);
             return response()->json(["status"=>200,"state"=>$state,"subs"=>$subs,
             "video"=>$video,"later"=>$later,"videos"=>$videos,'comments'=>$comments,
-            'comments_count'=>$comments->count(),'user'=>$user]
-            , 200, [], JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
+            'comments_count'=>$comments->count(),'user'=>$user], 200, [], JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
         } catch (Throwable $e) {
             return response()->json(['status' => 500, 'message' => $e->getMessage()."."]);
         }
     }
 
-    public function likes(Request $request)
+    public function like(Request $request)
     {
         try {
             $rules = array(
@@ -127,7 +136,7 @@ class VideoController extends Controller
                     return response()->json(['status' => 500, 'message' =>"El video no existe."]);
                 }
 
-                $video->likes++;            
+                $video->likes++;
                 $video->save();
                 return response()->json(['status' => 200, 'message' => "Like al video \"".$video->nombre."\"."]);
             }
@@ -136,7 +145,7 @@ class VideoController extends Controller
         }
     }
 
-    public function dislikes(Request $request)
+    public function dislike(Request $request)
     {
         try {
             $rules = array(
@@ -154,9 +163,82 @@ class VideoController extends Controller
                     return response()->json(['status' => 500, 'message' =>"El video no existe."]);
                 }
 
-                $video->dislikes++;            
+                $video->dislikes++;
                 $video->save();
                 return response()->json(['status' => 200, 'message' => "Dislike al video \"".$video->nombre."\"."]);
+            }
+        } catch (Throwable $e) {
+            return response()->json(['status' => 500, 'message' => $e->getMessage()."."]);
+        }
+    }
+    public function update(Request $request)
+    {
+        try {
+            $rules = array(
+                'id' => 'numeric|required'
+            );
+
+            $validator = Validator::make($request->all(), $rules);
+            
+
+            if ($validator->fails()) {
+                return response()->json(['status' => 500, 'message' => "Error en el formulario.", 'messageJSON' => $validator]);
+            } else {
+                $video = Video::find($request->id);
+
+                if (!$video) {
+                    return response()->json(['status' => 500, 'message' =>"El video no existe."]);
+                }
+                if ($request->nombre) {
+                    $video->nombre = $request->nombre;
+                }
+                if ($request->descripcion) {
+                    $video->descripcion = $request->descripcion;
+                }
+                             
+                if ($request->hasFile('video')) {
+                    $file = $request->file('video');
+                    $video->tiempo = $request->duration;
+                    $video->url = $request->user_id.'_'.$file->getClientOriginalName();
+                    $file->move(base_path('\public\video'), $video->url);
+                    //$video->url = url('/')."/api/video/stream/".$video->url;
+                }
+                if ($request->hasFile('thumb')) {
+                    $file = $request->file('thumb');
+                    $video->img = $request->user_id.'_'.$file->getClientOriginalName();
+                    $file->move(base_path('\public\thumb'), $video->img);
+                    $video->img = url('/')."/thumb/".$video->img;
+                }
+
+                $video->save();
+                return response()->json(['status' => 200, 'message' => "El video \"".$video->nombre."\" ha sido actualizado.", 'video' => $video->id]);
+            }
+        } catch (Throwable $e) {
+            return response()->json(['status' => 500, 'message' => $e->getMessage()."."]);
+        }
+    }
+
+    public function delete(Request $request)
+    {
+        try {
+            $rules = array(
+                'id' => 'numeric|required'
+            );
+
+            $validator = Validator::make($request->all(), $rules);
+            
+
+            if ($validator->fails()) {
+                return response()->json(['status' => 500, 'message' => "Error en el formulario.", 'messageJSON' => $validator]);
+            } else {
+                $video = Video::find($request->id);
+
+                if (!$video) {
+                    return response()->json(['status' => 500, 'message' =>"El video no existe."]);
+                }
+      
+                $video->delete();
+                return response()->json(['status' => 200, 'message' => "El video \"".$video->nombre."\" ha sido eliminado.", 'video' => $video->id]);
             }
         } catch (Throwable $e) {
             return response()->json(['status' => 500, 'message' => $e->getMessage()."."]);

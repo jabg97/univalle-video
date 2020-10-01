@@ -1,11 +1,21 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { SideNavService } from "../../services/side-nav.service";
+import {
+  Component,
+  OnInit,
+  ViewChild
+} from "@angular/core";
+import {
+  SideNavService
+} from "../../services/side-nav.service";
 import {
   onSideNavChange,
   onMainContentChange
 } from "../../components/animation/nav-animation";
-import { ScreenBreakpointService } from "../../services/breakpoint.service";
-import { MatSidenav } from "@angular/material";
+import {
+  ScreenBreakpointService
+} from "../../services/breakpoint.service";
+import {
+  MatSidenav
+} from "@angular/material";
 
 @Component({
   selector: "app-home",
@@ -19,6 +29,5 @@ export class HomeComponent implements OnInit {
     public BP: ScreenBreakpointService
   ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }

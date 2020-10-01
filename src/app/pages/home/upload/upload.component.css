@@ -65,21 +65,25 @@ mat-checkbox {
   margin-top: 10px;
 }
 
-mat-card-content{
+mat-card-content {
   padding-top: 60px;
 }
-label mat-icon{
+
+label mat-icon {
   margin-top: 5px;
 }
-.ng-hide{
+
+.ng-hide {
   display: none;
 }
+
 .auth-button {
   margin-top: 20px;
   display: block;
   width: 80%;
   margin: 20px auto;
 }
+
 .file-button {
   position: relative;
   display: block;
@@ -91,7 +95,7 @@ label mat-icon{
   min-width: 64px;
   height: 36px;
   width: 80%;
- margin-top: 10px;
+  margin-top: 10px;
   text-align: center;
   text-overflow: ellipsis;
   text-transform: uppercase;
@@ -133,8 +137,10 @@ label mat-icon{
   top: 50%;
   border-radius: 50%;
   padding: 50%;
-  width: 32px; /* Safari */
-  height: 32px; /* Safari */
+  width: 32px;
+  /* Safari */
+  height: 32px;
+  /* Safari */
   background-color: rgb(var(--pure-material-onprimary-rgb, 255, 255, 255));
   opacity: 0;
   transform: translate(-50%, -50%) scale(1);
@@ -185,6 +191,10 @@ label mat-icon{
 .file-button:disabled::after {
   opacity: 0;
 }
-.channel-name-subs small{
+
+.channel-name-subs small {
   margin-top: 8px;
+}
+.link{
+  cursor: pointer;
 }

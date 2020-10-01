@@ -1,4 +1,6 @@
-import { NgModule } from "@angular/core";
+import {
+  NgModule
+} from "@angular/core";
 
 import {
   MatButtonToggleModule,
@@ -21,7 +23,9 @@ import {
   MatTabsModule,
   MatCardModule,
 } from "@angular/material";
-import { ScrollingModule } from "@angular/cdk/scrolling";
+import {
+  ScrollingModule
+} from "@angular/cdk/scrolling";
 
 const MaterialComponents = [
   MatButtonToggleModule,

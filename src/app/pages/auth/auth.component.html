@@ -11,12 +11,12 @@
         <mat-card-content>
           <form action="#" #fl="ngForm" (ngSubmit)="LoginSubmit(fl)">
             <mat-form-field>
-              <input matInput placeholder="Em@il" type="email" required name="email" ngModel #email="ngModel" />
+              <input matInput placeholder="Em@il: (test@example.com)" type="email" required name="email" ngModel #email="ngModel" />
               <mat-error *ngIf="email.invalid">Email requerido</mat-error>
               <mat-icon matSuffix>email</mat-icon>
             </mat-form-field>
             <mat-form-field>
-              <input matInput placeholder="Contraseña" type="password" required minlength="6" name="password" ngModel
+              <input matInput placeholder="Contraseña: (password)" type="password" required minlength="6" name="password" ngModel
                 #password="ngModel" />
               <mat-error *ngIf="password.errors && password.errors.required">
                 Contraseña requerida
@@ -77,3 +77,9 @@
     </mat-tab-group>
   </mat-card>
 </div>
+<ngx-spinner
+  bdColor="rgba(0,0,0,0.5)"
+  size="large"
+  color="#fff"
+  type="pacman"
+></ngx-spinner>

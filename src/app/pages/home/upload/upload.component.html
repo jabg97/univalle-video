@@ -1,45 +1,81 @@
-
-  <img src="{{ user.banner }}" onerror="this.src='../../../assets/img/banner.jpg'" class="banner" alt="" />
-  <div class="container">
-    <div class="channel">
-      <img class="avatar"
-      onerror="this.src='../../../assets/img/user.jpg'"
-        src="{{ user.profile }}"
-        alt="logo" />
-      <div class="channel-name-subs">
-        <p>{{ user.name }}</p>
-        <small>{{ subs }} subscriptores</small>
-      </div>
+<img src="{{ user.banner }}" onerror="this.src='../../../assets/img/banner.jpg'" class="banner" alt="" />
+<div class="container">
+  <div class="channel">
+    <img [routerLink]="['/channel/'+user.id]" class="avatar link" onerror="this.src='../../../assets/img/user.jpg'" src="{{ user.profile }}" alt="logo" />
+    <div class="channel-name-subs">
+      <p [routerLink]="['/channel/'+user.id]" class="link">{{ user.name }}</p>
+      <small>{{ subs }} subscriptores</small>
+    </div>
     <div class="mx-auto"></div>
 
   </div>
   <div class="tab">
     <mat-tab-group animationDuration="350ms">
-      <mat-tab label="Subir Video">
+      <mat-tab label="Editar Video" *ngIf="id && edit">
         <mat-card-content>
-          <form action="#" #fu="ngForm" (ngSubmit)="UploadSubmit(fu)">
+          <form action="#" #fu="ngForm" (ngSubmit)="UpdateSubmit(fu)">
             <mat-form-field>
-              <input matInput placeholder="Nombre" required name="nombre" ngModel #nombre="ngModel" />
+              <input value="{{ edit.nombre }}" matInput placeholder="Nombre" name="nombre" ngModel #nombre="ngModel" />
               <mat-icon matSuffix>edit</mat-icon>
               <mat-error *ngIf="nombre.invalid">
                 Nombre requerido
               </mat-error>
             </mat-form-field>
             <mat-form-field>
-              <textarea matInput cdkTextareaAutosize
-              cdkAutosizeMinRows="1"
-              cdkAutosizeMaxRows="5"
-              placeholder="Descripción" required name="descripcion" ngModel #descripcion="ngModel"></textarea>
+              <textarea value="{{ edit.descripcion }}" matInput cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5"
+                placeholder="Descripción" name="descripcion" ngModel #descripcion="ngModel"></textarea>
               <mat-icon matSuffix>edit</mat-icon>
               <mat-error *ngIf="descripcion.invalid">
                 Descripción requerida
               </mat-error>
             </mat-form-field>
-           
-              <input (change)="VideoChange($event)" class="ng-hide" id="video" name="video" type="file" required accept=".mp4" />
-              <label for="video" class="file-button"><mat-icon>videocam</mat-icon> Subir Video: <span id="duration"></span></label>
-              <input (change)="ThumbChange($event)"  class="ng-hide" id="thumb" name="thumb" type="file" required accept="image/*" />
-              <label for="thumb" class="file-button"><mat-icon>image</mat-icon> Subir Miniatura: <span id="size"></span></label>
+
+            <input (change)="VideoChange($event)" class="ng-hide" id="video" name="video" type="file"
+              accept=".mp4" />
+            <label for="video" class="file-button">
+              <mat-icon>videocam</mat-icon> Subir Video: <span id="duration"></span>
+            </label>
+            <input (change)="ThumbChange($event)" class="ng-hide" id="thumb" name="thumb" type="file"
+              accept="image/*" />
+            <label for="thumb" class="file-button">
+              <mat-icon>image</mat-icon> Subir Miniatura: <span id="size"></span>
+            </label>
+
+            <button mat-raised-button color="primary" class="auth-button">
+              Editar
+            </button>
+          </form>
+        </mat-card-content>
+      </mat-tab>
+      <mat-tab label="Subir Video" *ngIf="!id || !edit">
+        <mat-card-content>
+          <form action="#" #fu="ngForm" (ngSubmit)="UploadSubmit(fu)">
+            <mat-form-field>
+              <input matInput placeholder="Nombre" name="nombre" ngModel #nombre="ngModel" required/>
+              <mat-icon matSuffix>edit</mat-icon>
+              <mat-error *ngIf="nombre.invalid">
+                Nombre requerido
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field>
+              <textarea matInput cdkTextareaAutosize cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5" required
+                placeholder="Descripción" name="descripcion" ngModel #descripcion="ngModel"></textarea>
+              <mat-icon matSuffix>edit</mat-icon>
+              <mat-error *ngIf="descripcion.invalid">
+                Descripción requerida
+              </mat-error>
+            </mat-form-field>
+
+            <input (change)="VideoChange($event)" class="ng-hide" id="video" name="video" type="file" required
+              accept=".mp4" />
+            <label for="video" class="file-button">
+              <mat-icon>videocam</mat-icon> Subir Video: <span id="duration"></span>
+            </label>
+            <input (change)="ThumbChange($event)" class="ng-hide" id="thumb" name="thumb" type="file" required
+              accept="image/*" />
+            <label for="thumb" class="file-button">
+              <mat-icon>image</mat-icon> Subir Miniatura: <span id="size"></span>
+            </label>
 
             <button mat-raised-button color="primary" class="auth-button">
               Publicar
@@ -47,7 +83,12 @@
           </form>
         </mat-card-content>
       </mat-tab>
-
     </mat-tab-group>
   </div>
 </div>
+<ngx-spinner
+  bdColor="rgba(0,0,0,0.5)"
+  size="large"
+  color="#fff"
+  type="pacman"
+></ngx-spinner>

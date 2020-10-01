@@ -1,11 +1,13 @@
-.bottom{
+.bottom {
   padding-top: 20px;
   padding-bottom: 20px;
 }
+
 .containers {
   width: 90% !important;
   margin: auto;
 }
+
 .video {
   max-width: 100%;
   max-height: 100%;
@@ -35,7 +37,7 @@ p {
   display: none;
 }
 
-.volume:hover ~ .volume-slider,
+.volume:hover~.volume-slider,
 .volume-slider:hover {
   display: flex;
 }
@@ -57,6 +59,7 @@ p {
   font-weight: 500;
   color: black;
 }
+
 .views {
   font-size: 14px;
   font-weight: 400;
@@ -109,6 +112,7 @@ span {
   font-weight: 500;
   line-height: 16px;
 }
+
 #channel p {
   font-size: 13px;
   font-weight: 400;
@@ -163,6 +167,7 @@ a {
   height: fit-content !important;
   line-height: unset !important;
 }
+
 .example-full-width {
   width: 100%;
   margin-left: 10px;
@@ -237,7 +242,8 @@ a {
   text-overflow: ellipsis;
   overflow: hidden;
 }
-.comment-like > button {
+
+.comment-like>button {
   width: fit-content !important;
   height: fit-content !important;
   line-height: unset !important;
@@ -277,10 +283,12 @@ strong {
   font-weight: 500;
   font-size: 13px;
 }
+
 .name {
   font-size: 13px;
   margin-left: 18px;
 }
-.link{
+
+.link {
   cursor: pointer;
 }

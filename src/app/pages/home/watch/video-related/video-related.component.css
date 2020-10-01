@@ -34,10 +34,11 @@ img {
   padding: 3px;
 }
 
-.link{
+.link {
   cursor: pointer;
 }
-.mainlink{
+
+.mainlink {
   cursor: pointer;
   font-weight: 600;
 }
