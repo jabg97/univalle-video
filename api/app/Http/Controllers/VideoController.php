@@ -201,13 +201,13 @@ class VideoController extends Controller
                     $video->tiempo = $request->duration;
                     $video->url = $request->user_id.'_'.$file->getClientOriginalName();
                     $file->move(base_path('\public\video'), $video->url);
-                    //$video->url = url('/')."/api/video/stream/".$video->url;
+                    //$video->url = str_replace("http://", "https://",$request->getSchemeAndHttpHost())."/api/video/stream/".$video->url;
                 }
                 if ($request->hasFile('thumb')) {
                     $file = $request->file('thumb');
                     $video->img = $request->user_id.'_'.$file->getClientOriginalName();
                     $file->move(base_path('\public\thumb'), $video->img);
-                    $video->img = url('/')."/thumb/".$video->img;
+                    $video->img = str_replace("http://", "https://", $request->getSchemeAndHttpHost())."/thumb/".$video->img;
                 }
 
                 $video->save();
@@ -289,8 +289,8 @@ class VideoController extends Controller
                 $video->img = $request->user_id.'_'.$file->getClientOriginalName();
                 $file->move(base_path('\public\thumb'), $video->img);
 
-                //$video->url = url('/')."/api/video/stream/".$video->url;
-                $video->img = url('/')."/thumb/".$video->img;
+                //$video->url = str_replace("http://", "https://",$request->getSchemeAndHttpHost())."/api/video/stream/".$video->url;
+                $video->img = str_replace("http://", "https://", $request->getSchemeAndHttpHost())."/thumb/".$video->img;
                 $video->save();
                 return response()->json(['status' => 200, 'message' => "El video \"".$video->nombre."\" ha sido subido.", 'video' => $video->id]);
             }

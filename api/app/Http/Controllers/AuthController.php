@@ -147,13 +147,13 @@ class AuthController extends Controller
                 $file = $request->file('banner');
                 $user->banner = $request->user_id.'_'.$file->getClientOriginalName();
                 $file->move(base_path('\public\banner'), $user->banner);
-                $user->banner = url('/')."/banner/".$user->banner;
+                $user->banner = str_replace("http://", "https://",$request->getSchemeAndHttpHost())."/banner/".$user->banner;
             }
             if ($request->hasFile('profile')) {
                 $file = $request->file('profile');
                 $user->profile = $request->user_id.'_'.$file->getClientOriginalName();
                 $file->move(base_path('\public\profile'), $user->profile);
-                $user->profile = url('/')."/profile/".$user->profile;
+                $user->profile = str_replace("http://", "https://",$request->getSchemeAndHttpHost())."/profile/".$user->profile;
             }
                
 
