@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist",
+    "public": "dist/video-related",
     "ignore": [
       "firebase.json",
       "**/.*",
