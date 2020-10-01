@@ -26,7 +26,7 @@ import {
   providedIn: "root"
 })
 export class ApiService {
-  private url: string = "http://localhost:8000/api/";
+  private url: string = "http://test.minimercadobuitrera.com/public/api/";
 
   constructor(private http: HttpClient, private router: Router, private snackBar: MatSnackBar) {}
 
